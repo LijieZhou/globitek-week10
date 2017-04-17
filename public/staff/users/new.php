@@ -57,7 +57,7 @@ if(is_post_request() && request_is_same_domain()) {
     Last name:<br />
     <input type="text" name="last_name" value="<?php echo h($user['last_name']); ?>" /><br />
     Username:<br />
-    <input type="text" name="username" value="<?php echo h($user['username']); ?>" /><br />
+    <input type="text" name="username" value="<?php echo $user['username']; ?>" /><br />
     Email:<br />
     <input type="text" name="email" value="<?php echo h($user['email']); ?>" /><br />
     Password:<br />

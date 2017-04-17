@@ -41,5 +41,4 @@ $user = db_fetch_assoc($users_result);
   <a href="edit.php?id=<?php echo h(u($user['id'])); ?>">Edit</a><br />
   <a href="delete.php?id=<?php echo h(u($user['id'])); ?>">Delete</a><br />
 </div>
-
 <?php include(SHARED_PATH . '/footer.php'); ?>

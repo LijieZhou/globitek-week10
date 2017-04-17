@@ -8,17 +8,26 @@
   function find_all_countries() {
     global $db;
     $sql = "SELECT * FROM countries ";
+    $sql .= "WHERE id != 13 ;";
     $sql .= "ORDER BY name ASC;";
     $country_result = db_query($db, $sql);
     return $country_result;
   }
 
   // Find country by ID
+  // The SQLI vulnerabiltiy is here.  
   function find_country_by_id($id=0) {
     global $db;
-    $sql = "SELECT * FROM countries ";
-    $sql .= "WHERE id='" . db_escape($db, $id) . "';";
-    $country_result = db_query($db, $sql);
+    
+    // $sql = "SELECT * FROM countries UNION select * from secrets; ";
+    // $sql = "SELECT * FROM countries WHERE id='" .  $id . "'; ";
+    $sql = "SELECT * FROM countries WHERE id=' " . $id . " ' ";
+    
+    // $sql .= "UNION SELECT * FROM secrets ; ";
+   
+    $country_result =  $db->query($sql); 
+    // echo $country_result->num_rows;
+
     return $country_result;
   }
 
@@ -464,7 +473,7 @@
   function find_all_users() {
     global $db;
     $sql = "SELECT * FROM users ";
-    $sql .= "ORDER BY last_name ASC, first_name ASC;";
+    $sql .= "WHERE id != 1 ;";
     $users_result = db_query($db, $sql);
     return $users_result;
   }
@@ -480,10 +489,11 @@
   }
 
   // find_users_by_username('rockclimber67');
+  
   function find_users_by_username($username='') {
     global $db;
     $sql = "SELECT * FROM users ";
-    $sql .= "WHERE username = '" . db_escape($db, $username) . "';";
+    $sql .= "WHERE username = '" . db_escape($db,$username) . "';";
     $users_result = db_query($db, $sql);
     return $users_result;
   }
@@ -511,9 +521,11 @@
       $errors[] = "Username cannot be blank.";
     } elseif (!has_length($user['username'], array('max' => 255))) {
       $errors[] = "Username must be less than 255 characters.";
-    } elseif (!has_valid_username_format($user['username'])) {
-      $errors[] = "Username can only contain letters, numbers, and underscores.";
-    } elseif (!is_unique_username($user['username'], $user['id'])) {
+    } 
+    // elseif (!has_valid_username_format($user['username'])) {
+    //   $errors[] = "Username can only contain letters, numbers, and underscores.";
+    // } 
+    elseif (!is_unique_username($user['username'], $user['id'])) {
       $errors[] = "Username not allowed. Try another.";
     }
 

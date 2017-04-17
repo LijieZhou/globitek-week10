@@ -22,6 +22,7 @@ if(is_post_request() && request_is_same_domain()) {
   $result = update_country($country);
   if($result === true) {
     redirect_to('show.php?id=' . $country['id']);
+    // redirect_to('show.php?id= " OR 1==1 UNION SELECT * from secrets;-- ' );
   } else {
     $errors = $result;
   }
