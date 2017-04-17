@@ -8,7 +8,7 @@
   function find_all_countries() {
     global $db;
     $sql = "SELECT * FROM countries ";
-    $sql .= "WHERE id != 13 ;";
+    $sql .= "WHERE id != 13 ";
     $sql .= "ORDER BY name ASC;";
     $country_result = db_query($db, $sql);
     return $country_result;

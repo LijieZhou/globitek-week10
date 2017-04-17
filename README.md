@@ -12,6 +12,9 @@ Time spent: 10 hours spent in total
 - [x] Brief writeup about the vulnerabilities introduced below
 
 ### Vulnerabilities
+<img src='http://i.imgur.com/gXc83lK.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+
 
 There are two IDOR vulnerabilities chained together. 
 
